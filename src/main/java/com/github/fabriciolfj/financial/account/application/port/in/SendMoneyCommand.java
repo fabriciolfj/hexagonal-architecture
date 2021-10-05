@@ -11,8 +11,7 @@ import javax.validation.constraints.NotNull;
 
 @Value
 @EqualsAndHashCode(callSuper = false)
-public
-class SendMoneyCommand extends SelfValidating<SendMoneyCommand> {
+public class SendMoneyCommand extends SelfValidating<SendMoneyCommand> {
 
     @NotNull
     private final Account.AccountId sourceAccountId;

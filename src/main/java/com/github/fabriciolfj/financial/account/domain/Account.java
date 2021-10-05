@@ -1,17 +1,27 @@
 package com.github.fabriciolfj.financial.account.domain;
 
-import lombok.Data;
-import lombok.Value;
+import lombok.*;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
 
-@Data
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class Account {
 
-    private AccountId id;
-    private Money baseLineBalance;
-    private ActivityWindow activityWindow;
+    @Getter
+    private final AccountId id;
+    @Getter
+    private final Money baseLineBalance;
+    @Getter
+    private final ActivityWindow activityWindow;
+
+    public static Account withoutId(final Money baseLineBalance, final ActivityWindow activityWindow) {
+        return new Account(null, baseLineBalance, activityWindow);
+    }
+
+    public static Account withId(final AccountId accountId, final Money baseLineBalance, final ActivityWindow activityWindow) {
+        return new Account(accountId, baseLineBalance, activityWindow);
+    }
 
     public Money calculateBalance() {
         return Money.add(this.baseLineBalance, this.activityWindow.calculateBalance(id));
